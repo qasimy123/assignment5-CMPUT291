@@ -25,3 +25,7 @@ jobs:
     - name: Run Task 1
       run: |
         python3 A5T1.py
+    - name: Run Task 2
+      run: |
+        python3 setup.py
+        python3 A5T2.py

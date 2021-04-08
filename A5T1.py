@@ -10,18 +10,13 @@
 # Referenced the official python documentation to read csv
 # https://docs.python.org/3/library/csv.html
 
-from typing import List
-import sqlite3
-import csv
-import os
 import unittest
+from util import connect, load_data
 
-Connection = sqlite3.Connection
-DB_PATH = "A5.db"
-LISTING_SUMMARY_DATA = "YVR_Airbnb_listings_summary.csv"
-REVIEW_DATA = "YVR_Airbnb_reviews.csv"
+LISTINGS_DATA = "YVR_Airbnb_listings_summary.csv"
+REVIEWS_DATA = "YVR_Airbnb_reviews.csv"
 
-CREATE_SUMMARY_TABLE = '''
+CREATE_LISTINGS_TABLE = '''
     CREATE TABLE listings (
         id INTEGER,
         -- ID of the listing
@@ -45,7 +40,7 @@ CREATE_SUMMARY_TABLE = '''
     );
     '''
 
-CREATE_REVIEW_TABLE = '''
+CREATE_REVIEWS_TABLE = '''
     CREATE TABLE reviews (
         listing_id INTEGER,
         id INTEGER,
@@ -58,43 +53,11 @@ CREATE_REVIEW_TABLE = '''
     '''
 
 
-def connect() -> Connection:
-    # Returns a connection to the database provided at the path.
-    db_path = exact_path(DB_PATH)
-    connection = sqlite3.connect(db_path)
-    cursor = connection.cursor()
-    # To enable foreign keys for SQLite
-    cursor.execute(' PRAGMA foreign_keys=ON; ')
-    connection.commit()
-    return connection
-
-
-def exact_path(path) -> str:
-    curr = os.path.dirname(__file__)
-    load_path = os.path.join(curr, path)
-    return load_path
-
-
-def load_data(path: str) -> List[str]:
-    data_path = exact_path(path)
-    data = []
-    with open(data_path) as csvfile:
-        datareader = csv.reader(csvfile)
-        for row in datareader:
-            data.append(row)
-        csvfile.close()
-    return data[1:]
-
-
-def is_valid_row(added, row) -> bool:
-    return row[0] not in added
-
-
 def main() -> None:
-    summary_data = load_data(LISTING_SUMMARY_DATA)
-    review_data = load_data(REVIEW_DATA)
+    listings_data = load_data(LISTINGS_DATA)
+    review_data = load_data(REVIEWS_DATA)
     make_main()
-    populate_summary_table(summary_data)
+    populate_listings_table(listings_data)
     populate_review_table(review_data)
 
 
@@ -110,8 +73,8 @@ def make_main() -> None:
     '''
     connection.cursor().execute(delete_listings_table)
     connection.cursor().execute(delete_reviews_table)
-    connection.cursor().execute(CREATE_SUMMARY_TABLE)
-    connection.cursor().execute(CREATE_REVIEW_TABLE)
+    connection.cursor().execute(CREATE_LISTINGS_TABLE)
+    connection.cursor().execute(CREATE_REVIEWS_TABLE)
     connection.close()
 
 
@@ -146,7 +109,7 @@ def populate_review_table(review_data) -> None:
     connection.close()
 
 
-def populate_summary_table(summary_data) -> None:
+def populate_listings_table(listings_data) -> None:
     connection = connect()
     query = '''
     INSERT INTO
@@ -165,22 +128,22 @@ def populate_summary_table(summary_data) -> None:
     '''
 
     insertions = []
-    for i in range(0, len(summary_data)):
+    for i in range(0, len(listings_data)):
         pass_val = False
-        for j in range(0, len(summary_data[i])):
-            if summary_data[i][j] is None:
+        for j in range(0, len(listings_data[i])):
+            if listings_data[i][j] is None:
                 pass_val = True
         if pass_val is not True:
             insertions.append({
-                "id": summary_data[i][0],
-                "name": summary_data[i][1],
-                "host_id": summary_data[i][2],
-                "host_name": summary_data[i][3],
-                "neighbourhood": summary_data[i][4],
-                "room_type": summary_data[i][5],
-                "price": summary_data[i][6],
-                "minimum_nights": summary_data[i][7],
-                "availability_365": summary_data[i][8]
+                "id": listings_data[i][0],
+                "name": listings_data[i][1],
+                "host_id": listings_data[i][2],
+                "host_name": listings_data[i][3],
+                "neighbourhood": listings_data[i][4],
+                "room_type": listings_data[i][5],
+                "price": listings_data[i][6],
+                "minimum_nights": listings_data[i][7],
+                "availability_365": listings_data[i][8]
             })
     connection.executemany(query, insertions)
 
