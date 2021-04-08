@@ -21,7 +21,6 @@ DB_PATH = "A5.db"
 LISTING_SUMMARY_DATA = "YVR_Airbnb_listings_summary.csv"
 REVIEW_DATA = "YVR_Airbnb_reviews.csv"
 
-# id	name	host_id	host_name	neighbourhood	room_type	price	minimum_nights	availability_365
 CREATE_SUMMARY_TABLE = '''
     CREATE TABLE listings (
         id INTEGER,
@@ -46,7 +45,6 @@ CREATE_SUMMARY_TABLE = '''
     );
     '''
 
-# listing_id	id	date	reviewer_id	reviewer_name	comments
 CREATE_REVIEW_TABLE = '''
     CREATE TABLE reviews (
         listing_id INTEGER,
@@ -120,7 +118,16 @@ def make_main() -> None:
 def populate_review_table(review_data) -> None:
     connection = connect()
     query = '''
-        INSERT INTO reviews VALUES(:listing_id, :id, :date, :reviewer_id, :reviewer_name, :comments);
+        INSERT INTO
+            reviews
+        VALUES(
+                :listing_id,
+                :id,
+                :date,
+                :reviewer_id,
+                :reviewer_name,
+                :comments
+            );
     '''
 
     insertions = []
@@ -142,17 +149,28 @@ def populate_review_table(review_data) -> None:
 def populate_summary_table(summary_data) -> None:
     connection = connect()
     query = '''
-    INSERT INTO listings
-        VALUES(:id, :name, :host_id, :host_name, :neighbourhood, :room_type, :price, :minimum_nights, :availability_365);
+    INSERT INTO
+        listings
+    VALUES(
+            :id,
+            :name,
+            :host_id,
+            :host_name,
+            :neighbourhood,
+            :room_type,
+            :price,
+            :minimum_nights,
+            :availability_365
+        );
     '''
 
     insertions = []
     for i in range(0, len(summary_data)):
         pass_val = False
         for j in range(0, len(summary_data[i])):
-            if(summary_data[i][j] == None):
+            if summary_data[i][j] is None:
                 pass_val = True
-        if(pass_val != True):
+        if pass_val is not True:
             insertions.append({
                 "id": summary_data[i][0],
                 "name": summary_data[i][1],
@@ -175,7 +193,13 @@ class DatabaseTest(unittest.TestCase):
     def test_listings_table(self):
         connection = connect()
         test_query = '''
-            SELECT MIN(host_id), MAX(host_id), AVG(host_id), COUNT(host_id) FROM listings;
+            SELECT
+                MIN(host_id),
+                MAX(host_id),
+                AVG(host_id),
+                COUNT(host_id)
+            FROM
+                listings;
         '''
         data = connection.cursor().execute(test_query).fetchone()
         print(data)
@@ -186,7 +210,13 @@ class DatabaseTest(unittest.TestCase):
     def test_reviews_table(self):
         connection = connect()
         test_query = '''
-            SELECT MIN(id), MAX(id), AVG(id), COUNT(id) FROM reviews;
+            SELECT
+                MIN(id),
+                MAX(id),
+                AVG(id),
+                COUNT(id)
+            FROM
+                reviews;
         '''
         data = connection.cursor().execute(test_query).fetchone()
         print(data)
