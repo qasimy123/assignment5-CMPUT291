@@ -17,7 +17,9 @@ def setup():
     listings_collection.delete_many({})
 
 
-def getSQLiteData(query: str, params: dict = {},) -> List[tuple]:
+def getSQLiteData(query: str, params: dict = None,) -> List[tuple]:
+    if params is None:
+        params = {}
     connection = connect()
     cursor = connection.cursor()
     cursor.execute(query, params)
