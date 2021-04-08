@@ -102,7 +102,7 @@ def main() -> None:
 
 def make_main() -> None:
     connection = connect()
-    
+
     delete_listings_table = '''
         DROP TABLE IF EXISTS listings;
     '''
@@ -169,6 +169,7 @@ def populate_summary_table(summary_data) -> None:
     connection.commit()
     connection.close()
 
+
 class DatabaseTest(unittest.TestCase):
     # Checksum verification
     def test_listings_table(self):
@@ -179,7 +180,8 @@ class DatabaseTest(unittest.TestCase):
         data = connection.cursor().execute(test_query).fetchone()
         print(data)
         connection.close()
-        self.assertTupleEqual(data,  (6033, 387534175, 115176061.85829493, 4340))
+        self.assertTupleEqual(
+            data,  (6033, 387534175, 115176061.85829493, 4340))
 
     def test_reviews_table(self):
         connection = connect()
@@ -189,7 +191,9 @@ class DatabaseTest(unittest.TestCase):
         data = connection.cursor().execute(test_query).fetchone()
         print(data)
         connection.close()
-        self.assertTupleEqual(data, (26444, 730124064, 370354766.84915775, 147936))
+        self.assertTupleEqual(
+            data, (26444, 730124064, 370354766.84915775, 147936))
+
 
 if __name__ == "__main__":
     main()
