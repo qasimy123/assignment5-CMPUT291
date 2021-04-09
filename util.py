@@ -23,6 +23,7 @@ def connect() -> Connection:
 
 
 def connectMongo() -> Database:
+    # We are hosting our mongodb server on the cloud instead of using localhost
     client = MongoClient("mongodb://user:3wjbyDECDtDmKSze@cluster0-shard-00-00.ys458.mongodb.net:27017,cluster0-shard-00-01.ys458.mongodb.net:27017,cluster0-shard-00-02.ys458.mongodb.net:27017/A5db?ssl=true&replicaSet=atlas-u96gdl-shard-0&authSource=admin&retryWrites=true&w=majority")
     db = client["A5db"]
     return db
