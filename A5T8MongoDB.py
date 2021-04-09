@@ -24,6 +24,7 @@ def find_recent_review(listing_id: str) -> List:
         return data
     except ValueError:
         print("Invalid input")
+        return None
 
 
 if __name__ == "__main__":
