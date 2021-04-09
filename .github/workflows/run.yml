@@ -29,3 +29,6 @@ jobs:
       run: |
         python3 setup.py
         python3 A5T2.py
+    - name: Run remaining files
+      run: |
+        python3 Test_Files.py
