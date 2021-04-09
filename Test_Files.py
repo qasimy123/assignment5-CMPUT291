@@ -25,14 +25,16 @@ class A5T9SQLiteTest(unittest.TestCase):
         create_virtual_table()
         data = find_similar_listings_sqlite("gross, disgusting, ugly")
         print(data)
-        self.assertListEqual(data, [('*New Modern Studio in Van, Near Airport &Downtown*', 'das studio ist gut gelegen, nahe skytrain station, sauber, gross und schön. würde wieder buchen.'), ('Beautiful Heritage Home in Kitsilano', 'Great place, terrific location, very homey and well appointed.  Unfortunately the bathroom shower stall was very disgusting with mold and mildew.'), ('Downtown Vancouver Penthouse Private Room 3003', 'Apartment was in a great area and had a great view. The bedding was old and felt disgusting, but had a good time.')])
+        self.assertListEqual(data, [('*New Modern Studio in Van, Near Airport &Downtown*', 'das studio ist gut gelegen, nahe skytrain station, sauber, gross und schön. würde wieder buchen.'), ('Beautiful Heritage Home in Kitsilano',
+                             'Great place, terrific location, very homey and well appointed.  Unfortunately the bathroom shower stall was very disgusting with mold and mildew.'), ('Downtown Vancouver Penthouse Private Room 3003', 'Apartment was in a great area and had a great view. The bedding was old and felt disgusting, but had a good time.')])
 
 
 class A5T9MongoDBTest(unittest.TestCase):
     def test_find_similar_listings(self):
         data = find_similar_listings_mongo("gross, disgusting, ugly")
         print(data)
-        self.assertListEqual(data, [{'name': 'AMAZING Downtown Suite w/ HOT TUB,GYM,SAUNA, POOL', 'score': 1.520878721859114}, {'name': '开心果家庭旅馆', 'score': 1.0275362318840582}, {'name': 'Modern 1 bedroom 1 Den Parking Tinseltown Gastown', 'score': 1.0213260135135136}])
+        self.assertListEqual(data, [{'name': 'AMAZING Downtown Suite w/ HOT TUB,GYM,SAUNA, POOL', 'score': 1.520878721859114}, {
+                             'name': '开心果家庭旅馆', 'score': 1.0275362318840582}, {'name': 'Modern 1 bedroom 1 Den Parking Tinseltown Gastown', 'score': 1.0213260135135136}])
 
 
 if __name__ == "__main__":
