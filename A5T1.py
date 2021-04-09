@@ -1,15 +1,5 @@
 # Task 1
 
-# main.py is adapted from the SQLite-in-Python-1-Example1.py File from a lab
-# File name: SQLite-in-Python-1-Example1.py
-# Lab Title: Lab (Python & SQLite - Part 1)
-# Link to Source: https://drive.google.com/file/d/11ukUPkVpdjjNPhocDZin5cdZUlHvELFZ/view
-# Date Posted: 10:03 AM Feb 25, 2021
-# Author: Professor Mario Nascimento
-
-# Referenced the official python documentation to read csv
-# https://docs.python.org/3/library/csv.html
-
 import unittest
 from util import connect, load_data
 
