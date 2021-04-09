@@ -79,15 +79,18 @@ class DatabaseTest(unittest.TestCase):
     def test_listings_table(self):
         cursor = listings_collection.aggregate(
             [
-                {"$group": {"_id": "null", "min": {"$min": "$host_id"}, "max": {
-                    "$max": "$host_id"}, "avg": {"$avg": "$host_id"}, "count": {"$sum": 1}}}
+                {"$group": {"_id": "null", "min": {"$min": "$host_id"},
+                            "max": {
+                    "$max": "$host_id"}, "avg": {"$avg": "$host_id"},
+                    "count": {"$sum": 1}}}
             ]
         )
         result = list(cursor)
         print(result)
 
         self.assertListEqual([{'_id': 'null', 'min': 6033, 'max': 387534175,
-                               'avg': 115176061.85829493, 'count': 4340}], result)
+                               'avg': 115176061.85829493,
+                               'count': 4340}], result)
 
     def test_reviews_table(self):
         cursor = listings_collection.aggregate([
@@ -95,14 +98,16 @@ class DatabaseTest(unittest.TestCase):
             {"$unwind": "$reviews"},
 
             {"$group": {"_id": "null", "min": {"$min": "$reviews.id"}, "max": {
-                "$max": "$reviews.id"}, "avg": {"$avg": "$reviews.id"}, "count": {"$sum": 1}}}
+                "$max": "$reviews.id"}, "avg": {"$avg": "$reviews.id"},
+                "count": {"$sum": 1}}}
 
         ])
 
         result = list(cursor)
         print(result)
         self.assertListEqual([{'_id': 'null', 'min': 26444, 'max': 730124064,
-                               'avg': 370354766.84915775, 'count': 147936}], result)
+                               'avg': 370354766.84915775,
+                               'count': 147936}], result)
 
 
 if __name__ == "__main__":
