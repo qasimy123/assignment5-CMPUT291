@@ -1,4 +1,3 @@
-from pymongo.command_cursor import CommandCursor
 from util import connectMongo
 from typing import List
 
