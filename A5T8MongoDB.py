@@ -13,7 +13,7 @@ def find_recent_review(listing_id: str) -> List:
     db = connectMongo()
     listings_collection = db["listings"]
     try:
-        cursor: CommandCursor = listings_collection.aggregate([
+        cursor = listings_collection.aggregate([
             {"$match": {"id": int(listing_id)}},  # Find the matching listing
             {"$unwind": "$reviews"},  # Unwind the reviews list to access attr
             {"$sort": {"reviews.date": -1, "_id": 1}}, {"$limit": 1},
