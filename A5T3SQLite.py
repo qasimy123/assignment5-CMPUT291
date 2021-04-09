@@ -14,13 +14,15 @@ QUERY_3 = '''
         10;
 '''
 
+
 def main():
     task3()
+
 
 def task3():
     connection = connect()
     cursor = connection.cursor()
-    
+
     cursor.execute(QUERY_3)
     rows = cursor.fetchall()
 
@@ -30,9 +32,10 @@ def task3():
             print(("| ".join(map(str, row))))
     else:
         print('Error finding result ')
-    
+
     connection.commit()
     connection.close()
+
 
 if __name__ == "__main__":
     main()

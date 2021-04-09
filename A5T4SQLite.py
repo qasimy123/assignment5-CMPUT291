@@ -18,13 +18,15 @@ QUERY_4 = '''
         10;
 '''
 
+
 def main():
     task4()
+
 
 def task4():
     connection = connect()
     cursor = connection.cursor()
-    
+
     cursor.execute(QUERY_4)
     rows = cursor.fetchall()
 
@@ -34,9 +36,10 @@ def task4():
             print("".join(map(str, row)))
     else:
         print('Error finding result ')
-    
+
     connection.commit()
     connection.close()
+
 
 if __name__ == "__main__":
     main()
