@@ -10,11 +10,10 @@ def task5():
     db = connectMongo()
     entry = input("Specify the neighbourhood: ")
     
-    cursor = db.listings.aggregate([{
+    cursor = db.listings.aggregate([
+    { "$match": { "neighbourhood": entry } },
+    { "$group": { "_id": "null", "avg": {"$avg":"$price" } }}
 
-        "$group":{
-            "_id":entry,
-            "price": {"$avg":"$price"}}}
     ])
     # cursor2 = db.listings.aggregate([{
     #     "$project":{
@@ -34,8 +33,7 @@ def task5():
     #     print(result)
 
     for result in cursor:
-        print(result['price'])   
-
+        print(result)
 
 if __name__ == "__main__":
     main()
