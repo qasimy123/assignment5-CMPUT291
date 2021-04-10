@@ -48,7 +48,8 @@ class A5T5MongoTest(unittest.TestCase):
     def test_task5(self):
         data = task5Mongo("Downtown")
 
-        self.assertListEqual([{'_id': 'null', 'avg': 160.59687228496958}], data)
+        self.assertListEqual(
+            [{'_id': 'null', 'avg': 160.59687228496958}], data)
 
 
 class A5T5QLiteTest(unittest.TestCase):
