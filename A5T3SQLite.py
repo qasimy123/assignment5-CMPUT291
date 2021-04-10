@@ -1,4 +1,5 @@
 from util import connect
+import time
 
 QUERY_3 = ''' 
     select
@@ -22,8 +23,11 @@ def main():
 def task3():
     connection = connect()
     cursor = connection.cursor()
+    
+    t_start = time.process_time()
 
     cursor.execute(QUERY_3)
+    t_taken = time.process_time()-t_start
     rows = cursor.fetchall()
 
     if len(rows):
@@ -35,6 +39,7 @@ def task3():
 
     connection.commit()
     connection.close()
+    print("Total time taken: {}s".format(t_taken))
 
 
 if __name__ == "__main__":
