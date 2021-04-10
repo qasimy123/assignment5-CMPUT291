@@ -8,7 +8,6 @@ listings_collection = db["listings"]
 
 def main():
     # This main function sets up the mongodb database and populates it
-    setup()
     populate_database()
 
 
@@ -56,7 +55,7 @@ def populate_database():
             "availability_365": listing[8],
             "reviews": reviews
         })
-
+    setup()
     ret = listings_collection.insert_many(listings)
     # Print list of the _id values of the inserted documents
     listings_ids = ret.inserted_ids
