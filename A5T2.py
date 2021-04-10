@@ -8,11 +8,13 @@ listings_collection = db["listings"]
 
 def main():
     # This main function sets up the mongodb database and populates it
+    print("Creating mongod collection, this will take around 5 minutes...")
     populate_database()
 
 
 def setup():
     # delete all previous entries in the listings collection
+    print("Deleting all previous entries")
     listings_collection.delete_many({})
 
 
@@ -59,7 +61,7 @@ def populate_database():
     ret = listings_collection.insert_many(listings)
     # Print list of the _id values of the inserted documents
     listings_ids = ret.inserted_ids
-    print(listings_ids)
+    print("Print done adding {} documents".format(len(listings_ids)))
 
 
 def getReviewsForListing(listing_id: int) -> List[tuple]:
