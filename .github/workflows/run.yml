@@ -31,4 +31,4 @@ jobs:
         python3 A5T2.py
     - name: Run remaining files
       run: |
-        python3 Test_Files.py
+        python3 TestA5.py

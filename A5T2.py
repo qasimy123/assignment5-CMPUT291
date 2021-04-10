@@ -112,5 +112,5 @@ class DatabaseTest(unittest.TestCase):
 
 if __name__ == "__main__":
     # Uncomment the below line to repopulate the database
-    # main()
+    main()
     unittest.main()
