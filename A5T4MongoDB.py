@@ -28,7 +28,7 @@ def task4():
         for result in cursor:
             print(result["id"])
     else:
-        print('Error finding result ')
+        print('Error finding result')
         
 
 
