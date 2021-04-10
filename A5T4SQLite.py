@@ -19,6 +19,7 @@ QUERY_4 = '''
         10;
 '''
 
+
 def main():
     task4()
 
@@ -42,6 +43,7 @@ def task4():
     connection.commit()
     connection.close()
     print("Total time taken: {}s".format(t_taken))
+
 
 if __name__ == "__main__":
     main()

@@ -23,7 +23,7 @@ def main():
 def task3():
     connection = connect()
     cursor = connection.cursor()
-    
+
     t_start = time.process_time()
 
     cursor.execute(QUERY_3)
