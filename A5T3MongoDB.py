@@ -9,14 +9,15 @@ def task3():
     
     db = connectMongo()
     cursor = db.listings.aggregate([
-        {
-            "$group" : {
+            {
+            "$group": {
 
-                "_id" : "$host_id",
-                "id" : {"$sum": 1},
-                },
-                "$sort":{"host_id":1}
-        }])
+                "_id": "$host_id",
+                "owned listings": {"$sum": 1},
+            }},
+            {"$sort": {"_id":-1}},
+            {"$limit":10}
+        ])
 
     for result in cursor:
         print(result)
