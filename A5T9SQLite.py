@@ -73,7 +73,6 @@ def create_query(keywords) -> str:
     list_of_words = keywords.split(',')
     new_list = []
     for keyword in list_of_words:
-        keyword: str
         new_list.append(keyword.strip())
     return " OR ".join(new_list)
 
