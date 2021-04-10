@@ -34,7 +34,7 @@ def create_text_index():
     print("Done creating new index")
 
 
-def create_query(keywords: str) -> str:
+def create_query(keywords) -> str:
     list_of_words = keywords.split(',')
     new_list = []
     for keyword in list_of_words:
@@ -43,7 +43,7 @@ def create_query(keywords: str) -> str:
     return " ".join(new_list)  # Space behaves as an OR operator
 
 
-def find_similar_listings(keywords: str) -> CommandCursor:
+def find_similar_listings(keywords) -> CommandCursor:
     query = create_query(keywords)
     print("Searching: {}".format(query))
 

@@ -69,7 +69,7 @@ def create_virtual_table():
     connection.close()
 
 
-def create_query(keywords: str) -> str:
+def create_query(keywords) -> str:
     list_of_words = keywords.split(',')
     new_list = []
     for keyword in list_of_words:
