@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+import time
 from util import connect, connectMongo
 from typing import List
 import unittest
@@ -8,7 +11,7 @@ listings_collection = db["listings"]
 
 def main():
     # This main function sets up the mongodb database and populates it
-    print("Creating mongod collection, this will take around 5 minutes...")
+    print("Creating mongod collection, this will take around 1 minute...")
     populate_database()
 
 
@@ -34,17 +37,18 @@ def populate_database():
     listings = []
 
     listings_data = getListingsTable()
-
+    reviews_table = getReviewsTable()
+    t_start = time.process_time()
     for listing in listings_data:
-        reviews_data = getReviewsForListing(listing[0])
         reviews = []
-        for review in reviews_data:
-            reviews.append({"listing_id": review[0],
-                            "id": review[1],
-                            "date": review[2],
-                            "reviewer_id": review[3],
-                            "reviewer_name": review[4],
-                            "comments": review[5]})
+        for review in reviews_table:
+            if(review[0] == listing[0]):
+                reviews.append({"listing_id": review[0],
+                                "id": review[1],
+                                "date": review[2],
+                                "reviewer_id": review[3],
+                                "reviewer_name": review[4],
+                                "comments": review[5]})
         listings.append({
             "id": listing[0],
             "name": listing[1],
@@ -57,6 +61,8 @@ def populate_database():
             "availability_365": listing[8],
             "reviews": reviews
         })
+    t_taken = time.process_time()-t_start
+    print("Print total time taken {}s".format(t_taken))
     setup()
     ret = listings_collection.insert_many(listings)
     # Print list of the _id values of the inserted documents
@@ -64,14 +70,14 @@ def populate_database():
     print("Print done adding {} documents".format(len(listings_ids)))
 
 
-def getReviewsForListing(listing_id: int) -> List[tuple]:
-    query = "SELECT * FROM reviews where listing_id = :listing_id"
-    data = getSQLiteData(query, {"listing_id": listing_id})
+def getListingsTable() -> List[tuple]:
+    query = "SELECT * FROM listings;"
+    data = getSQLiteData(query)
     return data
 
 
-def getListingsTable() -> List[tuple]:
-    query = "SELECT * FROM listings"
+def getReviewsTable() -> List[tuple]:
+    query = "SELECT * FROM reviews;"
     data = getSQLiteData(query)
     return data
 

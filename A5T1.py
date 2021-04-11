@@ -1,4 +1,4 @@
-# Task 1
+#!/usr/bin/env python3
 
 import unittest
 from util import connect, load_data
