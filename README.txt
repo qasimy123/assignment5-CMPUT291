@@ -100,6 +100,13 @@ Running Task 9.
     2. You will be prompted to enter the comma separated list of keywords. Enter the keywords and press enter.
     3. The top 3 listing names with the most similar reviews will be printed to stdout.
 
+Citations:
 
-
-    
+Referenced answer from user zero323 to understand how to unwind an empty list with a default value.
+Link to author's profile:
+https://stackoverflow.com/users/1560062/zero323
+Link to original source:
+https://stackoverflow.com/questions/31058374/mongodb-aggregation-with-unwind-on-empty-array
+Licence:  CC BY-SA 4.0
+Date posted: Jun 25 2015
+Website: Stack Overflow

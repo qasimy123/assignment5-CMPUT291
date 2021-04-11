@@ -6,28 +6,37 @@ import time
 FIND_RECENT_REVIEW = \
     '''
         select
-            l.host_name,
-            l.price,
             r.comments
         from
-            reviews r,
-            listings l
+            reviews r
         where
             r.listing_id = :listing_id
-            and r.listing_id = l.id
         order by
             date(r.date) desc;
+    '''
+
+FIND_LISTING_HOST_AND_PRICE = \
+    '''
+        select
+            l.host_name,
+            l.price
+        from
+            listings l
+        where l.id = :listing_id;
     '''
 
 
 def main():
     listing_id = input("Enter the listing_id: ")
-    data = find_recent_review(listing_id)
-    if data is None:
-        print("No reviews found")
+    review_data = find_recent_review(listing_id)
+    if review_data is None:
+        review_data = [None]
+    listing_data = find_listing(listing_id)
+    if listing_data is None:
+        print("Listing not found")
     else:
         print("\nHost Name: {}\nPrice: {}\nComment: {}".format(
-            data[0], data[1], data[2]))
+            listing_data[0], listing_data[1], review_data[0]))
 
 
 def find_recent_review(listing_id: str):
@@ -36,7 +45,17 @@ def find_recent_review(listing_id: str):
     t_start = time.process_time()
     cursor.execute(FIND_RECENT_REVIEW, {"listing_id": listing_id})
     t_taken = time.process_time()-t_start
-    print("Total time taken: {}s".format(t_taken))
+    print("Total time taken to find the review: {}s".format(t_taken))
+    return cursor.fetchone()
+
+
+def find_listing(listing_id: str):
+    connection = connect()
+    cursor = connection.cursor()
+    t_start = time.process_time()
+    cursor.execute(FIND_LISTING_HOST_AND_PRICE, {"listing_id": listing_id})
+    t_taken = time.process_time()-t_start
+    print("Total time taken to find listing: {}s".format(t_taken))
     return cursor.fetchone()
 
 
