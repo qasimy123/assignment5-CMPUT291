@@ -1,3 +1,12 @@
+# Referenced answer from user zero323 to understand how to unwind an empty list with a default
+# Link to author's profile:
+# https://stackoverflow.com/users/1560062/zero323
+# Link to original source:
+# https://stackoverflow.com/questions/31058374/mongodb-aggregation-with-unwind-on-empty-array
+# Licence:  CC BY-SA 4.0
+# Date posted: Jun 25 2015
+# Website: Stack Overflow
+
 from util import connectMongo
 from typing import List
 import time
@@ -6,8 +15,8 @@ import time
 def main():
     listing_id = input("Enter the listing_id: ")
     data = find_recent_review(listing_id)
-    if data is None:
-        print("No reviews found")
+    if data is None or len(data) == 0:
+        print("Listing not found")
     else:
         for review in data:
             print("\nHost Name: {}\nPrice: {}\nComment: {}".format(
@@ -21,6 +30,14 @@ def find_recent_review(listing_id: str) -> List:
         t_start = time.process_time()
         cursor = listings_collection.aggregate([
             {"$match": {"id": int(listing_id)}},  # Find the matching listing
+            # This projection is in the case that the listing does not have a review
+            {"$project": {"host_name": 1, "price": 1, "reviews": {
+                "$cond": {
+                    "if": {"$eq": [{"$size": "$reviews"}, 0]},
+                    "then": [{"comments": "None"}],
+                    "else": "$reviews"
+                }
+            }}},
             {"$unwind": "$reviews"},  # Unwind the reviews list to access attr
             {"$sort": {"reviews.date": -1, "_id": 1}}, {"$limit": 1},
             {"$project": {

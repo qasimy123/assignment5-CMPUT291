@@ -33,11 +33,10 @@ Included files:
 9. A5T8MongoDB.py
 10. A5T8SQLite.py
 11. A5T9MongoDB.py
-12. util.py  ** This file must be in the same directory as the application files. **
-13. TestA5.py ** Not required but includes tests for all the application files **
-14. setup.py ** Installs the pymongo library **
-15. YVR_Airbnb_listings_summary.csv ** CSV file required by A5T1.py **
-16. YVR_Airbnb_reviews.csv ** CSV file required by A5T1.py **
+12. util.py  ** REQUIRED. This file must be in the same directory as the application files. **
+13. TestA5.py ** Not required but this includes tests for all the application files **
+14. setup.py ** Not mandatory but installs the pymongo library **
+15. README.txt
 
 Instructions: 
 
@@ -100,6 +99,13 @@ Running Task 9.
     2. You will be prompted to enter the comma separated list of keywords. Enter the keywords and press enter.
     3. The top 3 listing names with the most similar reviews will be printed to stdout.
 
+Citations:
 
-
-    
+Referenced answer from user zero323 to understand how to unwind an empty list with a default value.
+Link to author's profile:
+https://stackoverflow.com/users/1560062/zero323
+Link to original source:
+https://stackoverflow.com/questions/31058374/mongodb-aggregation-with-unwind-on-empty-array
+Licence:  CC BY-SA 4.0
+Date posted: Jun 25 2015
+Website: Stack Overflow
