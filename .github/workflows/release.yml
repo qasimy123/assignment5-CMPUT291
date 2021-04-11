@@ -1,0 +1,33 @@
+name: "tagged-release"
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.A }}"
+          prerelease: false
+          files: |
+            A5T1.py
+            A5T2.py
+            A5T3MongoDB.py
+            A5T3SQLite.py
+            A5T4MongoDB.py
+            A5T4SQLite.py
+            A5T5MongoDB.py
+            A5T5SQLite.py
+            A5T8MongoDB.py
+            A5T8SQLite.py
+            A5T9MongoDB.py
+            setup.py
+            TestA5.py
+            util.py
+            README.txt
