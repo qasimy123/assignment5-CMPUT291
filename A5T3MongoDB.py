@@ -23,8 +23,9 @@ def task3() -> List:
     ])
     t_taken = time.process_time()-t_start
     data = list(cursor)
+    print("Top ten host_ids with the amount of listings they own ordered by host_id: ")
     for result in data:
-        print(result)
+        print(result['_id'], '|', result['owned listings'])
     print("Total time taken: {}s".format(t_taken))
     return data
 

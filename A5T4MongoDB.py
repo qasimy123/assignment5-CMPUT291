@@ -16,6 +16,7 @@ def task4() -> List:
     ).sort("id", -1).limit(10)
 
     data = list(cursor)
+    print("Ten listed properties that have not recieved any review, ordered by listing_id: ")
     for result in data:
         print(result["id"])
 
