@@ -43,6 +43,7 @@ def task4():
     connection.commit()
     connection.close()
     print("Total time taken: {}s".format(t_taken))
+    return rows
 
 
 if __name__ == "__main__":
