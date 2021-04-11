@@ -22,9 +22,13 @@ def task5(neighbourhood: str) -> List:
     ])
     t_taken = time.process_time()-t_start
     data = list(cursor)
-    for result in data:
-        print("{:.2f}".format(result['avg']))
-    print("Total time taken: {}s".format(t_taken))
+    if data:
+        print("Average rental cost per night for", neighbourhood+" is:")
+        for result in data:
+            print("{:.2f}".format(result['avg']))
+        print("Total time taken: {}s".format(t_taken))
+    else:
+        print(neighbourhood+" Does not exist in database")
     return data
 
 

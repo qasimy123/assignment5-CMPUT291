@@ -31,7 +31,7 @@ def task3():
     rows = cursor.fetchall()
 
     if len(rows):
-        print("How many listings the top ten hosts owns, ordered by host_id")
+        print("Top ten host_ids with the amount of listings they own ordered by host_id: ")
         for row in rows:
             print(("| ".join(map(str, row))))
     else:
