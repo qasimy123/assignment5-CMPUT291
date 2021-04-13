@@ -48,6 +48,7 @@ Instructions:
 
 How-to:
 
+(CLARIFICATION:  sorting by host_id and then outputing those host_ids and the number of listings)
 Running Task 3.
 
     For MongoDB 

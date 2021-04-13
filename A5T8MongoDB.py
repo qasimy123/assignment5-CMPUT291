@@ -18,6 +18,7 @@ def main():
     if data is None or len(data) == 0:
         print("Listing not found")
     else:
+        print("The host_name, rental_price and most recent review for given listing_id")
         for review in data:
             print("\nHost Name: {}\nPrice: {}\nComment: {}".format(
                 review['host_name'], review['price'], review['reviews']['comments']))
@@ -43,8 +44,8 @@ def find_recent_review(listing_id: str) -> List:
             {"$project": {
                 "host_name": 1, "price": 1,  "_id": 0, "reviews.comments": 1}}
         ])
-        data = list(cursor)
         t_taken = time.process_time()-t_start
+        data = list(cursor)
         print("Total time taken: {}s".format(t_taken))
         return data
     except ValueError:
