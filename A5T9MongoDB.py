@@ -15,6 +15,7 @@ def main():
 
     print("\nResult:")
     for row in data:
+        print("Listing ID and Name for the top 3 listings with the most similar reviews.")
         print("Listing ID: {}, Listing Name: {}".format(
             row.get("id"), row.get("name")))
 

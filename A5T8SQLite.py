@@ -35,6 +35,7 @@ def main():
     if listing_data is None:
         print("Listing not found")
     else:
+        print("The host_name, rental_price and most recent review for given listing_id")
         print("\nHost Name: {}\nPrice: {}\nComment: {}".format(
             listing_data[0], listing_data[1], review_data[0]))
 
