@@ -77,9 +77,9 @@ class A5T8SQLiteTest(unittest.TestCase):
 class A5T9MongoDBTest(unittest.TestCase):
     def test_find_similar_listings(self):
         data = find_similar_listings_mongo("gross, disgusting, ugly")
-
-        self.assertListEqual(data, [{'name': 'AMAZING Downtown Suite w/ HOT TUB,GYM,SAUNA, POOL', 'score': 1.520878721859114}, {
-                             'name': '开心果家庭旅馆', 'score': 1.0275362318840582}, {'name': 'Modern 1 bedroom 1 Den Parking Tinseltown Gastown', 'score': 1.0213260135135136}])
+        print(data)
+        self.assertListEqual(data, [{'id': 42755867, 'name': 'AMAZING Downtown Suite w/ HOT TUB,GYM,SAUNA, POOL', 'score': 1.520878721859114}, {'id': 23949937,
+                                                                                                                                                'name': '开心果家庭旅馆', 'score': 1.0275362318840582}, {'id': 5347437, 'name': 'Modern 1 bedroom 1 Den Parking Tinseltown Gastown', 'score': 1.0213260135135136}])
 
 
 if __name__ == "__main__":
