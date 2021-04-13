@@ -15,7 +15,8 @@ def main():
 
     print("\nResult:")
     for row in data:
-        print(row.get("name"))
+        print("Listing ID: {}, Listing Name: {}".format(
+            row.get("id"), row.get("name")))
 
 
 def create_text_index():
@@ -50,7 +51,8 @@ def find_similar_listings(keywords: str) -> CommandCursor:
     # Find listings with the reviews most similar to the keywords
     cursor = listings_collection.find(
         {"$text": {"$search": query}},
-        {"score": {"$meta": "textScore"}, "_id": False, "name": True}
+        {"score": {"$meta": "textScore"}, "_id": False, "name": True,
+         "id": True}
     ).sort([('score', {'$meta': 'textScore'})]).limit(3)
     t_taken = time.process_time() - t_start
 
